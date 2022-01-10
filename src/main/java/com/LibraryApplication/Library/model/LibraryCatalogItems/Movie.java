@@ -1,5 +1,11 @@
 package com.LibraryApplication.Library.model.LibraryCatalogItems;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
+@Entity
+@DiscriminatorValue("2")
+
 public class Movie extends LibraryCatalogItem {
     private final double movieDuration;
     private final String director;

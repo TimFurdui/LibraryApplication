@@ -1,4 +1,7 @@
 package com.LibraryApplication.Library.repository;
 
-public interface LibraryCatalogItemsRepository {
+import com.LibraryApplication.Library.model.LibraryCatalogItems.LibraryCatalogItem;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface LibraryCatalogItemsRepository extends JpaRepository<LibraryCatalogItem, Integer> {
 }

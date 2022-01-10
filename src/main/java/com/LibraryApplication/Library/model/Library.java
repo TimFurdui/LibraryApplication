@@ -1,271 +1,40 @@
 package com.LibraryApplication.Library.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.LibraryApplication.Library.model.LibraryCatalogItems.LibraryCatalogItem;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
-public class
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Library {
+public class Library {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    @Getter
+    @Setter
+    private Integer libraryId;
 
+    @Getter
+    @Setter
     private Integer phoneNumber;
+
+    @Getter
+    @Setter
     private String name, address, email;
 
-        //TODO need to create junction table for library table and libraryCatalogItems
-    //private List<LibraryCatalogItem> libraryCatalogItems;
-    private String libraryCatalogItems;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "library")
+    private Set<LibraryCatalogItem> libraryCatalogItems;
 
-        //TODO need to create junction table for library table and checkedOutLibraryCatalogItems
+    //TODO need to create junction table for library table and libraryCatalogItems
+//    private Set<LibraryCatalogItem> libraryCatalogItems;
+
+    //TODO need to create junction table for library table and checkedOutLibraryCatalogItems
     //private Map<Person, LibraryCatalogItem> checkedOutLibraryCatalogItems;
 
-        //TODO need to create junction table for library table and listOfCustomers
+    //TODO need to create junction table for library table and listOfCustomers
     //private List<Person> listOfCustomers;
-    private String listOfCustomers;
 
 
 //    public List<LibraryCatalogItem> getLibraryCatalogItems() {
@@ -291,45 +60,5 @@ Library {
 //    public void setListOfCustomers(List<Person> listOfCustomers) {
 //        this.listOfCustomers = listOfCustomers;
 //    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(Integer phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
 }

@@ -1,5 +1,12 @@
 package com.LibraryApplication.Library.model.LibraryCatalogItems;
 
+
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
+@Entity
+@DiscriminatorValue("3")
+
 public class CD extends LibraryCatalogItem {
     private final double trackDuration;
 

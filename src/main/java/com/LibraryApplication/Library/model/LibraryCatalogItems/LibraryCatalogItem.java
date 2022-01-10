@@ -1,47 +1,33 @@
 package com.LibraryApplication.Library.model.LibraryCatalogItems;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.LibraryApplication.Library.model.Library;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.*;
 
 //Created class abstract so this class can't be implemented
 @Entity
+//Implemented Single Table strategy for Hibernate Inheritance Mapping and used Discriminator values to identify different records
+@DiscriminatorColumn(name="library_catalog_item_type", discriminatorType = DiscriminatorType.INTEGER)
 public abstract class LibraryCatalogItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    protected long catalogId;
+    @Getter
+    @Setter
+    protected Integer Id;
 
     //declared private for encapsulation
+    @Getter
+    @Setter
     protected String title, genre;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "library_id")
+    private Library library;
+
     protected LibraryCatalogItem() {
-    }
-
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getGenre() {
-        return genre;
-    }
-
-    public void setGenre(String genre) {
-        this.genre = genre;
-    }
-
-    public long getCatalogId() {
-        return catalogId;
-    }
-
-    public void setCatalogId(int catalogId) {
-        this.catalogId = catalogId;
     }
 
     @Override
@@ -49,7 +35,7 @@ public abstract class LibraryCatalogItem {
         return "LibraryCatalogItem{" +
                 "title='" + title + '\'' +
                 ", genre='" + genre + '\'' +
-                ", catalogId=" + catalogId +
+                ", catalogId=" + Id +
                 '}';
     }
 }
