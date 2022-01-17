@@ -11,9 +11,8 @@ import java.util.Set;
 public class Library {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
-    @Setter
     private Integer libraryId;
 
     @Getter
@@ -26,9 +25,6 @@ public class Library {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "library")
     private Set<LibraryCatalogItem> libraryCatalogItems;
-
-    //TODO need to create junction table for library table and libraryCatalogItems
-//    private Set<LibraryCatalogItem> libraryCatalogItems;
 
     //TODO need to create junction table for library table and checkedOutLibraryCatalogItems
     //private Map<Person, LibraryCatalogItem> checkedOutLibraryCatalogItems;

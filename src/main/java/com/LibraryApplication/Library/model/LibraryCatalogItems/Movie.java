@@ -7,16 +7,16 @@ import javax.persistence.Entity;
 @DiscriminatorValue("2")
 
 public class Movie extends LibraryCatalogItem {
-    private final double movieDuration;
+    private final double duration;
     private final String director;
 
-    public Movie(double movieDuration, String director) {
-        this.movieDuration = movieDuration;
+    public Movie(double duration, String director) {
+        this.duration = duration;
         this.director = director;
     }
 
-    public double getMovieDuration() {
-        return movieDuration;
+    public double getDuration() {
+        return duration;
     }
 
     public String getDirector() {
@@ -26,7 +26,7 @@ public class Movie extends LibraryCatalogItem {
     @Override
     public String toString() {
         return super.toString() + "Movie{" +
-                "movieDuration= " + movieDuration +
+                "duration= " + duration +
                 "director= " + director +
                 '}';
     }

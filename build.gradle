@@ -25,6 +25,7 @@ dependencies {
 	runtimeOnly 'mysql:mysql-connector-java:8.0.25'
 	annotationProcessor 'org.projectlombok:lombok:1.18.22'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test:2.6.1'
+	implementation 'org.apache.commons:commons-lang3:3.12.0'
 }
 
 test {
