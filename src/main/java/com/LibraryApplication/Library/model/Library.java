@@ -22,8 +22,8 @@ public class Library {
     @Getter
     @Setter
     private String name, address, email;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "library")
+    //TODO make libraryId foreign key relate to LibraryCtalogItem Table
+    @OneToMany(mappedBy = "library")
     private Set<LibraryCatalogItem> libraryCatalogItems;
 
     //TODO need to create junction table for library table and checkedOutLibraryCatalogItems

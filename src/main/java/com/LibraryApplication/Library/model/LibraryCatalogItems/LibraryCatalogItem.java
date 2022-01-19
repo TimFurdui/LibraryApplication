@@ -9,7 +9,7 @@ import javax.persistence.*;
 //Created class abstract so this class can't be implemented
 @Entity
 //Implemented Single Table strategy for Hibernate Inheritance Mapping and used Discriminator values to identify different records
-@DiscriminatorColumn(name="library_catalog_item_type", discriminatorType = DiscriminatorType.INTEGER)
+@DiscriminatorColumn(name="library_catalog_item_type", discriminatorType = DiscriminatorType.STRING)
 public abstract class LibraryCatalogItem {
 
     @Id
@@ -22,8 +22,8 @@ public abstract class LibraryCatalogItem {
     @Setter
     protected String title, genre;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "library_id")
+    @ManyToOne
+    @JoinColumn(name = "library_id", nullable = false, referencedColumnName = "libraryId")
     private Library library;
 
     protected LibraryCatalogItem() {

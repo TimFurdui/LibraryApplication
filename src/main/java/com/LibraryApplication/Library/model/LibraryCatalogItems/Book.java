@@ -3,7 +3,7 @@ package com.LibraryApplication.Library.model.LibraryCatalogItems;
 import javax.persistence.*;
 
 @Entity
-@DiscriminatorValue("1")
+@DiscriminatorValue("Book")
 
 public class Book extends LibraryCatalogItem {
     private final String ISBN, Author;

@@ -4,7 +4,7 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 @Entity
-@DiscriminatorValue("2")
+@DiscriminatorValue("Movie")
 
 public class Movie extends LibraryCatalogItem {
     private final double duration;
