@@ -34,9 +34,9 @@ public class LibraryController {
         return "Didn't save library, as library with same name already exists";
     }
 
-    @GetMapping("/viewLibraries")
+    @GetMapping("/getLibraries")
     public @ResponseBody
-    Iterable<Library> viewLibraryCatalog() {
+    Iterable<Library> getLibraries() {
         return libraryRepository.findAll();
     }
 

@@ -7,12 +7,15 @@ import javax.persistence.Entity;
 @DiscriminatorValue("Movie")
 
 public class Movie extends LibraryCatalogItem {
-    private final double duration;
-    private final String director;
+    private double duration = -1;
+    private String director = "";
 
     public Movie(double duration, String director) {
         this.duration = duration;
         this.director = director;
+    }
+
+    public Movie() {
     }
 
     public double getDuration() {

@@ -8,8 +8,8 @@ import javax.persistence.Entity;
 @DiscriminatorValue("CD")
 
 public class CD extends LibraryCatalogItem {
-    private final double duration;
-    private final String artist;
+    private double duration = -1;
+    private String artist = "";
 
     public CD(double duration, String artist) {
         super();
@@ -17,11 +17,14 @@ public class CD extends LibraryCatalogItem {
         this.artist = artist;
     }
 
+    public CD() {
+    }
 
     @Override
     public String toString() {
         return super.toString() + " CD{" +
-                "duration=" + duration +
+                "duration= " + duration +
+                "artist= " + artist +
                 '}';
     }
 }
