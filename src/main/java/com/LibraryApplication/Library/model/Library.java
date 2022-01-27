@@ -1,6 +1,5 @@
 package com.LibraryApplication.Library.model;
 
-import com.LibraryApplication.Library.model.LibraryCatalogItems.Book;
 import com.LibraryApplication.Library.model.LibraryCatalogItems.LibraryCatalogItem;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,9 +11,9 @@ import java.util.List;
 public class Library {
 
     @Getter
+    @Setter
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected Integer primaryKey;
+    protected Integer libraryId = 1;
 
     @Getter
     @Setter
@@ -25,8 +24,8 @@ public class Library {
     private String name, address, email;
 
     //TODO make libraryId foreign key relate to LibraryCatalogItem Table
-//    @OneToMany(mappedBy = "libraryId", targetEntity = Book.class)
-//    private List<LibraryCatalogItem> libraryCatalogItems;
+    @OneToMany(mappedBy = "libraryFk", targetEntity = LibraryCatalogItem.class, fetch = FetchType.LAZY)
+    private List<LibraryCatalogItem> libraryCatalogItems;
 
     //TODO need to create junction table for library table and checkedOutLibraryCatalogItems
     //private Map<Person, LibraryCatalogItem> checkedOutLibraryCatalogItems;

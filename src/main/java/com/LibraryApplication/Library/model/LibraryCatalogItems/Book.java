@@ -18,13 +18,12 @@ public class Book extends LibraryCatalogItem {
 
     }
 
-//    public Book(Integer libraryId, String isbn, String author) {
-//        super();
-//        this.libraryId = libraryId;
-//        this.ISBN = isbn;
-//        this.Author = author;
-//    }
-//
+    public Book(Integer libraryId, String isbn, String author) {
+        super();
+        this.libraryFk = libraryId;
+        this.ISBN = isbn;
+        this.author = author;
+    }
 //    @ManyToOne(targetEntity = Library.class)
 //    @JoinColumn(name = "library_id", nullable = false)
 //    protected Integer libraryId;

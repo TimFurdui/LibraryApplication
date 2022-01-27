@@ -3,6 +3,7 @@ package com.LibraryApplication.Library.controller;
 import com.LibraryApplication.Library.model.Library;
 import com.LibraryApplication.Library.model.LibraryCatalogItems.Book;
 import com.LibraryApplication.Library.model.LibraryCatalogItems.LibraryCatalogItem;
+import com.LibraryApplication.Library.repository.BookRepository;
 import com.LibraryApplication.Library.repository.LibraryCatalogItemsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,12 +23,16 @@ public class BookController {
     @Autowired
     private LibraryCatalogItemsRepository libraryCatalogItemsRepository;
 
+    @Autowired
+    private BookRepository bookRepository;
+
+
     @PostMapping(path = "/addNewBook")
     public @ResponseBody
     String addNewBook(@RequestParam(required = false) Integer libraryId, @RequestParam String title, @RequestParam String genre, @RequestParam String isbn, @RequestParam String author) {
 
-//        Book book = new Book(libraryId, isbn, author);
-        Book book = new Book(isbn, author);
+        Book book = new Book(libraryId, isbn, author);
+//        Book book = new Book(isbn, author);
         book.setTitle(title);
         book.setGenre(genre);
 
@@ -37,14 +42,14 @@ public class BookController {
             return "Saved Book to Library DB";
 
         }
-        return "Didn't save book, as book with same name already exists";
+        return "Didn't save book, as book with same name already exists. Please use update if you intend to update entity.";
         // https://www.baeldung.com/spring-new-requestmapping-shortcuts
     }
 
     @GetMapping(path = "/getBooks")
     public @ResponseBody
     Iterable<LibraryCatalogItem> getBooks() {
-        return libraryCatalogItemsRepository.findAll();
+        return bookRepository.getBooks();
     }
 
     @GetMapping(path = "/getBookById/{id}")
@@ -74,7 +79,6 @@ public class BookController {
     String updateBook(@RequestParam String title, @RequestParam(required = false) String newTitle, @RequestParam String genre, @RequestParam String isbn, @RequestParam String author) {
         Optional<LibraryCatalogItem> bookFromDb = libraryCatalogItemsRepository.findByTitle(title);
         if (bookFromDb.isPresent()) {
-            //TODO need to change code to accept new name as parameter
             Book book = new Book(isbn, author);
             book.setGenre(genre);
             book.setTitle(newTitle);

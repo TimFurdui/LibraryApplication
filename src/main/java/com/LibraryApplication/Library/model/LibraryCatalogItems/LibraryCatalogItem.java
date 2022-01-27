@@ -24,9 +24,9 @@ public abstract class LibraryCatalogItem {
     @Setter
     protected String title, genre;
 
-//    @ManyToOne(targetEntity = Library.class, cascade=CascadeType.ALL)
-//    @JoinColumn(name = "library_id"/*, nullable = false*/) //TODO uncomment nullable = false, once I figure out how to have foreign key
-//    protected Integer libraryId;
+    @ManyToOne(targetEntity = Library.class, cascade=CascadeType.ALL)
+    @JoinColumn(name = "library_fk"/*, nullable = false*/) //TODO uncomment nullable = false, once I figure out how to have foreign key
+    protected Integer libraryFk;
 
     protected LibraryCatalogItem() {
     }
@@ -40,7 +40,7 @@ public abstract class LibraryCatalogItem {
         return "LibraryCatalogItem{" +
                 "title='" + title + '\'' +
                 ", genre='" + genre + '\'' +
-                ", catalogId=" + Id +
+                ", id=" + Id +
                 '}';
     }
 
