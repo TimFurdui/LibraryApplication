@@ -1,47 +1,31 @@
 package com.LibraryApplication.Library.model.LibraryCatalogItems;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import lombok.Getter;
+import lombok.Setter;
 
-//Created class abstract so this class can't be implemented
-@Entity
+import javax.persistence.*;
+
+//I had an issue with using SingleTable Inheritance Mapping when it came to using ForeignKey,
+// so instead of persisting the whole class hierarchy (the parent class to the DB and inserting the subclass
+// entities in the parent class table), I decided to use the MappedSuperClass so each child class will have an
+// table while the superclass will not.
+@MappedSuperclass
 public abstract class LibraryCatalogItem {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    protected long catalogId;
+    @Column(name = "catalog_item_primary_key")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    protected Integer Id;
+
 
     //declared private for encapsulation
+    @Getter
+    @Setter
     protected String title, genre;
 
+    protected Integer libraryFk;
+
     protected LibraryCatalogItem() {
-    }
-
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getGenre() {
-        return genre;
-    }
-
-    public void setGenre(String genre) {
-        this.genre = genre;
-    }
-
-    public long getCatalogId() {
-        return catalogId;
-    }
-
-    public void setCatalogId(int catalogId) {
-        this.catalogId = catalogId;
     }
 
     @Override
@@ -49,7 +33,8 @@ public abstract class LibraryCatalogItem {
         return "LibraryCatalogItem{" +
                 "title='" + title + '\'' +
                 ", genre='" + genre + '\'' +
-                ", catalogId=" + catalogId +
+                ", id=" + Id +
                 '}';
     }
+
 }

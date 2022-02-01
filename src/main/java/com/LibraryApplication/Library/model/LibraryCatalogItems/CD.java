@@ -1,18 +1,32 @@
 package com.LibraryApplication.Library.model.LibraryCatalogItems;
 
-public class CD extends LibraryCatalogItem {
-    private final double trackDuration;
 
-    public CD(double trackDuration) {
+import javax.persistence.*;
+
+@Entity
+//@DiscriminatorValue("CD")
+
+public class CD extends LibraryCatalogItem {
+    private double duration = -1;
+    private String artist = "";
+
+    public CD(double duration, String artist) {
         super();
-        this.trackDuration = trackDuration;
+        this.duration = duration;
+        this.artist = artist;
     }
 
+    public CD() {
+    }
+
+    @JoinColumn(name = "library_fk"/*, nullable = false*/) //TODO uncomment nullable = false, once I figure out how to have foreign key
+    @ManyToOne(targetEntity = CD.class, cascade= CascadeType.ALL)
 
     @Override
     public String toString() {
         return super.toString() + " CD{" +
-                "trackDuration=" + trackDuration +
+                "duration= " + duration +
+                "artist= " + artist +
                 '}';
     }
 }
