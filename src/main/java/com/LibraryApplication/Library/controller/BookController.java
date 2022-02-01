@@ -1,10 +1,7 @@
 package com.LibraryApplication.Library.controller;
 
-import com.LibraryApplication.Library.model.Library;
 import com.LibraryApplication.Library.model.LibraryCatalogItems.Book;
-import com.LibraryApplication.Library.model.LibraryCatalogItems.LibraryCatalogItem;
 import com.LibraryApplication.Library.repository.BookRepository;
-import com.LibraryApplication.Library.repository.LibraryCatalogItemsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -16,29 +13,20 @@ import java.util.Optional;
 @RequestMapping(path = "/book")
 public class BookController {
 
-    //TODO create try catch blocks to handle common erros such as; no value present, etc...
-    //TODO find by title and find by ID to make sure book is unique,
-    // need to also add quantity so Library can have multiple books
-
-    @Autowired
-    private LibraryCatalogItemsRepository libraryCatalogItemsRepository;
-
     @Autowired
     private BookRepository bookRepository;
 
-
     @PostMapping(path = "/addNewBook")
     public @ResponseBody
-    String addNewBook(@RequestParam(required = false) Integer libraryId, @RequestParam String title, @RequestParam String genre, @RequestParam String isbn, @RequestParam String author) {
+    String addNewBook(@RequestParam Integer libraryId, @RequestParam String title, @RequestParam String genre, @RequestParam String isbn, @RequestParam String author) {
 
         Book book = new Book(libraryId, isbn, author);
-//        Book book = new Book(isbn, author);
         book.setTitle(title);
         book.setGenre(genre);
 
 
         if (getBookByName(title).isEmpty()) {
-            libraryCatalogItemsRepository.save(book);
+            bookRepository.save(book);
             return "Saved Book to Library DB";
 
         }
@@ -48,26 +36,24 @@ public class BookController {
 
     @GetMapping(path = "/getBooks")
     public @ResponseBody
-    Iterable<LibraryCatalogItem> getBooks() {
-        return bookRepository.getBooks();
+    Iterable<Book> getBooks() {
+        return bookRepository.findAll();
     }
 
     @GetMapping(path = "/getBookById/{id}")
     public @ResponseBody
-    Optional<LibraryCatalogItem>
+    Optional<Book>
     getBookById(@PathVariable Integer id) {
-        return libraryCatalogItemsRepository.findById(id);
+        return bookRepository.findById(id);
     }
 
-    //TODO find by title and find by ID to make sure book is unique,
-    // need to also add quantity so Library can have multiple books
     @GetMapping("/getBookByName/{name}")
     public @ResponseBody
-    Optional<LibraryCatalogItem>
+    Optional<Book>
     getBookByName(@PathVariable String title) {
-        Optional<LibraryCatalogItem> book;
+        Optional<Book> book;
         try {
-            book = libraryCatalogItemsRepository.findByTitle(title);
+            book = bookRepository.findByTitle(title);
         } catch (NonUniqueResultException nonUniqueResultException) {
             return Optional.empty();
         }
@@ -77,13 +63,13 @@ public class BookController {
     @PostMapping(path = "/updateBook")
     public @ResponseBody
     String updateBook(@RequestParam String title, @RequestParam(required = false) String newTitle, @RequestParam String genre, @RequestParam String isbn, @RequestParam String author) {
-        Optional<LibraryCatalogItem> bookFromDb = libraryCatalogItemsRepository.findByTitle(title);
+        Optional<Book> bookFromDb = bookRepository.findByTitle(title);
         if (bookFromDb.isPresent()) {
             Book book = new Book(isbn, author);
             book.setGenre(genre);
             book.setTitle(newTitle);
 
-            libraryCatalogItemsRepository.save(book);
+            bookRepository.save(book);
             return "Updated Book";
         }
 
@@ -94,8 +80,8 @@ public class BookController {
     public @ResponseBody
     String
     deleteBookById(@PathVariable Integer id) {
-        Optional<LibraryCatalogItem> book = libraryCatalogItemsRepository.findById(id);
-        book.ifPresent(value -> libraryCatalogItemsRepository.delete(value));
+        Optional<Book> book = bookRepository.findById(id);
+        book.ifPresent(value -> bookRepository.delete(value));
         return "Deleted Library with name: " + book.get().getTitle();
     }
 
@@ -104,8 +90,8 @@ public class BookController {
     String
     deleteBookByName(@PathVariable String name) {
 
-        Optional<LibraryCatalogItem> book = libraryCatalogItemsRepository.findByTitle(name);
-        book.ifPresent(value -> libraryCatalogItemsRepository.delete(value));
+        Optional<Book> book = bookRepository.findByTitle(name);
+        book.ifPresent(value -> bookRepository.delete(value));
         return "Deleted Library with name: " + book.get().getTitle();
     }
 

@@ -1,16 +1,15 @@
 package com.LibraryApplication.Library.model.LibraryCatalogItems;
 
-import com.LibraryApplication.Library.model.Library;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 
-//Created class abstract so this class can't be implemented
-@Entity
-//Implemented Single Table strategy for Hibernate Inheritance Mapping and used Discriminator values to identify different records
-@DiscriminatorColumn(name = "library_catalog_item_type", discriminatorType = DiscriminatorType.STRING)
+//I had an issue with using SingleTable Inheritance Mapping when it came to using ForeignKey,
+// so instead of persisting the whole class hierarchy (the parent class to the DB and inserting the subclass
+// entities in the parent class table), I decided to use the MappedSuperClass so each child class will have an
+// table while the superclass will not.
+@MappedSuperclass
 public abstract class LibraryCatalogItem {
 
     @Id
@@ -24,16 +23,10 @@ public abstract class LibraryCatalogItem {
     @Setter
     protected String title, genre;
 
-    @ManyToOne(targetEntity = Library.class, cascade=CascadeType.ALL)
-    @JoinColumn(name = "library_fk"/*, nullable = false*/) //TODO uncomment nullable = false, once I figure out how to have foreign key
     protected Integer libraryFk;
 
     protected LibraryCatalogItem() {
     }
-
-//    protected LibraryCatalogItem(Integer libraryId) {
-//        this.libraryId = libraryId;
-//    }
 
     @Override
     public String toString() {

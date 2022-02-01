@@ -1,11 +1,10 @@
 package com.LibraryApplication.Library.model.LibraryCatalogItems;
 
 
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
+import javax.persistence.*;
 
 @Entity
-@DiscriminatorValue("CD")
+//@DiscriminatorValue("CD")
 
 public class CD extends LibraryCatalogItem {
     private double duration = -1;
@@ -19,6 +18,9 @@ public class CD extends LibraryCatalogItem {
 
     public CD() {
     }
+
+    @JoinColumn(name = "library_fk"/*, nullable = false*/) //TODO uncomment nullable = false, once I figure out how to have foreign key
+    @ManyToOne(targetEntity = CD.class, cascade= CascadeType.ALL)
 
     @Override
     public String toString() {
