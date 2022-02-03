@@ -28,7 +28,6 @@ public class Library {
     @Setter
     private String name, address, email;
 
-    //TODO make libraryId foreign key relate to LibraryCatalogItem Table
     @OneToMany(mappedBy = "libraryFk", targetEntity = Book.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Book> booksList;
 
@@ -42,7 +41,7 @@ public class Library {
     //TODO need to create junction table for library table and checkedOutLibraryCatalogItems
     //private Map<Person, LibraryCatalogItem> checkedOutLibraryCatalogItems;
 
-    //TODO need to create junction table for library table and listOfCustomers
-    //private List<Person> listOfCustomers;
+    //TODO need to create junction table for library table and listOfPersons
+    //private List<Person> listOfPersons;
 
 }
