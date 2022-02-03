@@ -1,7 +1,6 @@
 package com.LibraryApplication.Library.controller;
 
 import com.LibraryApplication.Library.model.LibraryCatalogItems.CD;
-import com.LibraryApplication.Library.model.LibraryCatalogItems.LibraryCatalogItem;
 import com.LibraryApplication.Library.repository.CdRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,13 +34,13 @@ public class CdController {
 
     @GetMapping("/getCds")
     public @ResponseBody
-    Iterable<LibraryCatalogItem> getCds() {
+    Iterable<CD> getCds() {
         return cdRepository.findAll();
     }
 
     @GetMapping(path = "/getCdById/{id}")
     public @ResponseBody
-    Optional<LibraryCatalogItem>
+    Optional<CD>
     getCdById(@PathVariable Integer id) {
         return cdRepository.findById(id);
     }
@@ -79,7 +78,7 @@ public class CdController {
     public @ResponseBody
     String
     deleteCdById(@PathVariable Integer id) {
-        Optional<LibraryCatalogItem> cd = cdRepository.findById(id);
+        Optional<CD> cd = cdRepository.findById(id);
         cd.ifPresent(value -> cdRepository.delete(value));
         return "Deleted Library with name: " + cd.get().getTitle();
     }

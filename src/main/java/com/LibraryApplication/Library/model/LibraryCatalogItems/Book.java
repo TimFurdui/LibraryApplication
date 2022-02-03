@@ -3,7 +3,6 @@ package com.LibraryApplication.Library.model.LibraryCatalogItems;
 import javax.persistence.*;
 
 @Entity
-
 public class Book extends LibraryCatalogItem {
     private String ISBN = "", author = "";
 

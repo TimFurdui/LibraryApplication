@@ -1,13 +1,15 @@
 package com.LibraryApplication.Library.model.LibraryCatalogItems;
 
 
+import lombok.Getter;
+
 import javax.persistence.*;
 
 @Entity
-//@DiscriminatorValue("CD")
-
 public class CD extends LibraryCatalogItem {
+    @Getter
     private double duration = -1;
+    @Getter
     private String artist = "";
 
     public CD(double duration, String artist) {

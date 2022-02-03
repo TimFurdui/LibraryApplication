@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface CdRepository extends CrudRepository<LibraryCatalogItem, Integer> {
+public interface CdRepository extends CrudRepository<CD, Integer> {
     public Optional<CD> findByTitle (String name);
 }

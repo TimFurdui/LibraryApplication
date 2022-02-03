@@ -4,9 +4,9 @@ import java.util.Arrays;
 import java.util.Optional;
 
 public enum PersonRole {
-    LIBRARIAN("Librarian"),
-    CUSTOMER("Customer"),
-    ADMINISTRATOR("Admin");
+    LIBRARIAN("LIBRARIAN"),
+    CUSTOMER("CUSTOMER"),
+    ADMINISTRATOR("ADMIN");
 
     private final String role;
 

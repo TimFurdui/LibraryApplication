@@ -1,12 +1,15 @@
 package com.LibraryApplication.Library.model.LibraryCatalogItems;
 
+import lombok.Getter;
+
 import javax.persistence.*;
 
 @Entity
-//@DiscriminatorValue("Movie")
 
 public class Movie extends LibraryCatalogItem {
+    @Getter
     private double duration = -1;
+    @Getter
     private String director = "";
 
     public Movie() {

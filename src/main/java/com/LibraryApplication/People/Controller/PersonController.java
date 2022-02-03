@@ -23,10 +23,14 @@ public class PersonController {
     String addNewPerson(@RequestParam String firstName, @RequestParam(required = false) String middleName,
                         @RequestParam String lastName, @RequestParam String address,
                         @RequestParam String email, @RequestParam Integer age,
-                        @RequestParam Integer phoneNumber/*, @RequestParam String role*/) {
+                        @RequestParam Integer phoneNumber, @RequestParam String role) {
 
         Person person = new Person(firstName, middleName, lastName,
                 address, email, age, phoneNumber);
+
+        if(PersonRole.get(role).isPresent()){
+            person.setRole(PersonRole.get(role).get());
+        }
 
         if (getPersonByNumber(phoneNumber).isEmpty()) {
             personRepository.save(person);
@@ -47,6 +51,5 @@ public class PersonController {
         }
         return person;
     }
-
 
 }
