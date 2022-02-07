@@ -4,17 +4,19 @@ import com.LibraryApplication.Library.model.LibraryCatalogItems.Book;
 import com.LibraryApplication.Library.model.LibraryCatalogItems.CD;
 import com.LibraryApplication.Library.model.LibraryCatalogItems.LibraryCatalogItem;
 import com.LibraryApplication.Library.model.LibraryCatalogItems.Movie;
+import com.LibraryApplication.People.Model.Person;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Map;
 
 @Entity
 public class Library {
 
     @Id
-    @Column(name = "library_primary_key")
+    @Column(name = "pkLibrary")
     @Getter
     @Setter
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,11 +39,8 @@ public class Library {
     @OneToMany(mappedBy = "libraryFk", targetEntity = Movie.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Book> moviesList;
 
-
-    //TODO need to create junction table for library table and checkedOutLibraryCatalogItems
-    //private Map<Person, LibraryCatalogItem> checkedOutLibraryCatalogItems;
-
-    //TODO need to create junction table for library table and listOfPersons
-    //private List<Person> listOfPersons;
+//    private Map<Person, LibraryCatalogItem> checkedOutLibraryCatalogItems;
+    @OneToMany(mappedBy="library", targetEntity = Person.class, cascade = CascadeType.ALL)
+    private List<Person> listOfPersons;
 
 }

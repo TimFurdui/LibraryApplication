@@ -24,6 +24,11 @@ public abstract class LibraryCatalogItem {
     protected String title, genre;
 
     protected Integer libraryFk;
+    
+    @Getter
+    @Setter
+    protected Integer itemQuantity;
+
 
     protected LibraryCatalogItem() {
     }
