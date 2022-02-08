@@ -1,10 +1,16 @@
 package com.LibraryApplication.People.Model;
 
 import com.LibraryApplication.Library.model.Library;
+import com.LibraryApplication.Library.model.LibraryCatalogItems.Book;
+import com.LibraryApplication.Library.model.LibraryCatalogItems.CD;
+import com.LibraryApplication.Library.model.LibraryCatalogItems.LibraryCatalogItem;
+import com.LibraryApplication.Library.model.LibraryCatalogItems.Movie;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 //Each person has one library
 
@@ -12,9 +18,9 @@ import javax.persistence.*;
 public class Person {
 
     @Id
-    @Column(name = "person_primary_key")
+    @Column(name = "pk_person")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected Integer personPrimaryKey;
+    protected Integer pkPerson;
 
     @Getter
     @Setter
@@ -32,8 +38,15 @@ public class Person {
     @Getter
     @Setter
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "library_fk")
+    @JoinColumn(name = "library_fkd")
     private Library library;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    List<Book> checkedOutBooks;
+    @ManyToMany(cascade = CascadeType.ALL)
+    List<CD> checkedOutCds;
+    @ManyToMany(cascade = CascadeType.ALL)
+    List<Movie> checkedOutMovies;
 
     public Person() {
     }

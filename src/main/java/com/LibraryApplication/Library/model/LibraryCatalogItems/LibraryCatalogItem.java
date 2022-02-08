@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 //I had an issue with using SingleTable Inheritance Mapping when it came to using ForeignKey,
 // so instead of persisting the whole class hierarchy (the parent class to the DB and inserting the subclass
@@ -28,7 +29,6 @@ public abstract class LibraryCatalogItem {
     @Getter
     @Setter
     protected Integer itemQuantity;
-
 
     protected LibraryCatalogItem() {
     }

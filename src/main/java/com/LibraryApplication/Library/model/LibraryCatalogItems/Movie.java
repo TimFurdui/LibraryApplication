@@ -1,8 +1,11 @@
 package com.LibraryApplication.Library.model.LibraryCatalogItems;
 
+import com.LibraryApplication.People.Model.Person;
 import lombok.Getter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 
@@ -28,15 +31,6 @@ public class Movie extends LibraryCatalogItem {
         this.director = director;
     }
 
-    public double getDuration() {
-        return duration;
-    }
-
-    public String getDirector() {
-        return director;
-    }
-
-    @JoinColumn(name = "library_fk"/*, nullable = false*/) //TODO uncomment nullable = false, once I figure out how to have foreign key
     @ManyToOne(targetEntity = Movie.class, cascade= CascadeType.ALL)
 
     @Override
