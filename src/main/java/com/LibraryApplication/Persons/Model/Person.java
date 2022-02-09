@@ -1,5 +1,6 @@
 package com.LibraryApplication.People.Model;
 
+import com.LibraryApplication.Library.model.CheckedOutLibraryCatalogItems.PersonCheckedOutBooks;
 import com.LibraryApplication.Library.model.Library;
 import com.LibraryApplication.Library.model.LibraryCatalogItems.Book;
 import com.LibraryApplication.Library.model.LibraryCatalogItems.CD;
@@ -38,13 +39,15 @@ public class Person {
     @Getter
     @Setter
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "library_fkd")
+    @JoinColumn(name = "library_fk")
     private Library library;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    List<Book> checkedOutBooks;
+    @OneToMany(mappedBy = "persons")
+    List<PersonCheckedOutBooks> checkedOutBooks;
+
     @ManyToMany(cascade = CascadeType.ALL)
     List<CD> checkedOutCds;
+
     @ManyToMany(cascade = CascadeType.ALL)
     List<Movie> checkedOutMovies;
 
