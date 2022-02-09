@@ -1,6 +1,9 @@
 package com.LibraryApplication.Library.model.LibraryCatalogItems;
 
+import com.LibraryApplication.People.Model.Person;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Book extends LibraryCatalogItem {
@@ -22,7 +25,6 @@ public class Book extends LibraryCatalogItem {
         this.author = author;
     }
 
-    @JoinColumn(name = "library_fk"/*, nullable = false*/)
     @ManyToOne(targetEntity = Book.class, cascade = CascadeType.ALL)
 
     public String getISBN() {

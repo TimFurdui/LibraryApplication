@@ -1,9 +1,12 @@
 package com.LibraryApplication.Library.model.LibraryCatalogItems;
 
 
+import com.LibraryApplication.People.Model.Person;
 import lombok.Getter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class CD extends LibraryCatalogItem {
@@ -21,7 +24,6 @@ public class CD extends LibraryCatalogItem {
     public CD() {
     }
 
-    @JoinColumn(name = "library_fk"/*, nullable = false*/) //TODO uncomment nullable = false, once I figure out how to have foreign key
     @ManyToOne(targetEntity = CD.class, cascade= CascadeType.ALL)
 
     @Override
