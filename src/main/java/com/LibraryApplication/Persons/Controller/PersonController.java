@@ -1,12 +1,13 @@
-package com.LibraryApplication.People.Controller;
+package com.LibraryApplication.Persons.Controller;
 
+import com.LibraryApplication.Library.model.CheckedOutLibraryCatalogItems.PersonCheckedOutBooks;
 import com.LibraryApplication.Library.model.Library;
 import com.LibraryApplication.Library.model.LibraryCatalogItems.Book;
 import com.LibraryApplication.Library.model.LibraryCatalogItems.LibraryCatalogItem;
 import com.LibraryApplication.Library.repository.*;
-import com.LibraryApplication.People.Model.Person;
-import com.LibraryApplication.People.Model.PersonRole;
-import com.LibraryApplication.People.Repository.PersonRepository;
+import com.LibraryApplication.Persons.Model.Person;
+import com.LibraryApplication.Persons.Model.PersonRole;
+import com.LibraryApplication.Persons.Repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +30,8 @@ public class PersonController {
     private MovieRepository movieRepository;
     @Autowired
     private LibraryRepository libraryRepository;
+    @Autowired
+    private PersonCheckedOutBooksRepository personCheckedOutBooksRepository;
 
     @PostMapping(path = "/addNewPerson")
     public @ResponseBody
@@ -78,9 +81,10 @@ public class PersonController {
         return library;
     }
 
-//TODO checkout BOOK, MOVIE, CD
+    //TODO checkout BOOK, MOVIE, CD
     @GetMapping("/getCatalogItem/{itemCatalogPk}")
-    public @ResponseBody Optional<? extends LibraryCatalogItem> checkIfLibraryCatalogItemExist(@PathVariable Integer itemCatalogPk) {
+    public @ResponseBody
+    Optional<? extends LibraryCatalogItem> checkIfLibraryCatalogItemExist(@PathVariable Integer itemCatalogPk) {
 
         if (bookRepository.existsById(itemCatalogPk))
             return bookRepository.findById(itemCatalogPk);
@@ -96,13 +100,19 @@ public class PersonController {
     //Check if all items are checkedOut
     // Query for all of a specific item in library
     // Check if count is >= item quantity
-        // don't allow checkout
+    // don't allow checkout
     //checkout
     // (query total num of items and compare to item quantity that a library has available)
     //
 
-    @PostMapping(path="/checkoutItem")
-    public @ResponseBody String checkOutItem(@RequestParam Integer personPk, @RequestParam Integer itemCatalogPk){
+    @PostMapping(path = "/checkoutItem")
+    public @ResponseBody
+    String checkOutItem(@RequestParam Integer personPk, @RequestParam Integer itemCatalogPk) {
+        PersonCheckedOutBooks personCheckedOut = new PersonCheckedOutBooks();
+        personCheckedOut.setPersons(personRepository.findById(personPk).get());
+        personCheckedOut.setBooks((Book) checkIfLibraryCatalogItemExist(itemCatalogPk).get());
+
+        personCheckedOutBooksRepository.save(personCheckedOut);
         return ":";
     }
 

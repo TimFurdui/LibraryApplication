@@ -1,16 +1,13 @@
-package com.LibraryApplication.People.Model;
+package com.LibraryApplication.Persons.Model;
 
 import com.LibraryApplication.Library.model.CheckedOutLibraryCatalogItems.PersonCheckedOutBooks;
 import com.LibraryApplication.Library.model.Library;
-import com.LibraryApplication.Library.model.LibraryCatalogItems.Book;
 import com.LibraryApplication.Library.model.LibraryCatalogItems.CD;
-import com.LibraryApplication.Library.model.LibraryCatalogItems.LibraryCatalogItem;
 import com.LibraryApplication.Library.model.LibraryCatalogItems.Movie;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 //Each person has one library

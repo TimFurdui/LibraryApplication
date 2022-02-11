@@ -1,6 +1,6 @@
-package com.LibraryApplication.People.Repository;
+package com.LibraryApplication.Persons.Repository;
 
-import com.LibraryApplication.People.Model.Person;
+import com.LibraryApplication.Persons.Model.Person;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

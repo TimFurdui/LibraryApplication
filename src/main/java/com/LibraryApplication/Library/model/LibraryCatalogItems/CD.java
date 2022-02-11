@@ -1,12 +1,9 @@
 package com.LibraryApplication.Library.model.LibraryCatalogItems;
 
 
-import com.LibraryApplication.People.Model.Person;
 import lombok.Getter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 public class CD extends LibraryCatalogItem {
@@ -24,7 +21,7 @@ public class CD extends LibraryCatalogItem {
     public CD() {
     }
 
-    @ManyToOne(targetEntity = CD.class, cascade= CascadeType.ALL)
+//    @ManyToOne(targetEntity = CD.class, cascade= CascadeType.ALL)
 
     @Override
     public String toString() {

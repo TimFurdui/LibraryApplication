@@ -18,11 +18,12 @@ public class CdController {
 
     @PostMapping(path = "/addNewCd")
     public @ResponseBody
-    String addNewCd(@RequestParam(required = false) Integer LibraryId, @RequestParam String title, @RequestParam String genre, @RequestParam Double duration, @RequestParam String artist) {
+    String addNewCd(@RequestParam(required = false) Integer LibraryId, @RequestParam String title, @RequestParam String genre, @RequestParam Double duration, @RequestParam String artist, @RequestParam Integer itemQuantity) {
 
         CD cd = new CD(duration, artist);
         cd.setTitle(title);
         cd.setGenre(genre);
+        cd.setItemQuantity(itemQuantity);
 
         if (getCdByName(title).isEmpty()) {
             cdRepository.save(cd);

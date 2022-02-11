@@ -1,4 +1,4 @@
-package com.LibraryApplication.People.Model;
+package com.LibraryApplication.Persons.Model;
 
 import java.util.Arrays;
 import java.util.Optional;

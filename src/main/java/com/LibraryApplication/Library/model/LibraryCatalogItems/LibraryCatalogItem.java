@@ -15,9 +15,8 @@ public abstract class LibraryCatalogItem {
 
     @Id
     @Column(name = "catalog_item_primary_key")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     protected Integer Id;
-
 
     //declared private for encapsulation
     @Getter

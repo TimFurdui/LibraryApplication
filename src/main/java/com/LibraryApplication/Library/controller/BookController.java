@@ -18,12 +18,12 @@ public class BookController {
 
     @PostMapping(path = "/addNewBook")
     public @ResponseBody
-    String addNewBook(@RequestParam Integer libraryId, @RequestParam String title, @RequestParam String genre, @RequestParam String isbn, @RequestParam String author) {
+    String addNewBook(@RequestParam(required = false) Integer libraryId, @RequestParam String title, @RequestParam String genre, @RequestParam String isbn, @RequestParam String author, @RequestParam Integer itemQuantity) {
 
         Book book = new Book(libraryId, isbn, author);
         book.setTitle(title);
         book.setGenre(genre);
-
+        book.setItemQuantity(itemQuantity);
 
         if (getBookByName(title).isEmpty()) {
             bookRepository.save(book);

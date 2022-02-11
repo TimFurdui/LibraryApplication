@@ -3,7 +3,7 @@ package com.LibraryApplication.Library.model;
 import com.LibraryApplication.Library.model.LibraryCatalogItems.Book;
 import com.LibraryApplication.Library.model.LibraryCatalogItems.CD;
 import com.LibraryApplication.Library.model.LibraryCatalogItems.Movie;
-import com.LibraryApplication.People.Model.Person;
+import com.LibraryApplication.Persons.Model.Person;
 import lombok.Getter;
 import lombok.Setter;
 

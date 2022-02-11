@@ -1,12 +1,14 @@
 package com.LibraryApplication.Library.model.LibraryCatalogItems;
 
-import com.LibraryApplication.People.Model.Person;
+import com.LibraryApplication.Library.model.CheckedOutLibraryCatalogItems.PersonCheckedOutBooks;
+import lombok.Getter;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 public class Book extends LibraryCatalogItem {
+    @Getter
     private String ISBN = "", author = "";
 
     public Book() {
@@ -25,15 +27,8 @@ public class Book extends LibraryCatalogItem {
         this.author = author;
     }
 
-    @ManyToOne(targetEntity = Book.class, cascade = CascadeType.ALL)
-
-    public String getISBN() {
-        return ISBN;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
+    @OneToMany(mappedBy = "books")
+    List<PersonCheckedOutBooks> books;
 
     @Override
     public String toString() {

@@ -18,11 +18,12 @@ public class MovieController {
 
     @PostMapping(path = "/addNewMovie")
     public @ResponseBody
-    String addNewMovie(@RequestParam Integer libraryId, @RequestParam String title, @RequestParam String genre, @RequestParam Double duration, @RequestParam String director) {
+    String addNewMovie(@RequestParam(required = false) Integer libraryId, @RequestParam String title, @RequestParam String genre, @RequestParam Double duration, @RequestParam String director, @RequestParam Integer itemQuantity) {
 
         Movie movie = new Movie(libraryId, duration, director);
         movie.setTitle(title);
         movie.setGenre(genre);
+        movie.setItemQuantity(itemQuantity);
 
         if(getMovieByName(title).isEmpty()) {
             movieRepository.save(movie);
